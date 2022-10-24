@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./main.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>Surname</td>
+            <td>Phone</td>
+            <td>Action</td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>Smyth</td>
+            <td>8888</td>
+            <td><button class="del">Delete</button></td>
+        </tr>
+        <tr>
+            <td>Josh</td>
+            <td>Doe</td>
+            <td>8888</td>
+            <td><button class="del">Delete</button></td>
+        </tr>
+        <tr>
+            <td>Hanry</td>
+            <td>Porter</td>
+            <td>8888</td>
+            <td><button class="del">Delete</button></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td><input type="text" required class="inp" name="name"></td>
+            <td><input type="text" required class="inp" name="surname"></td>
+            <td><input type="text" required class="inp" name="phone"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"></td>
+            <td><button class="btn">Add Contact</button></td>
+        </tr>
+    </table>
+    <script id="itemTemplate" type="text/template">
+         <tr>
+            <td>[name]</td>
+            <td>[surname]</td>
+            <td>[phone]</td>
+            <td><button class="del">Delete</button></td>
+        </tr>
+    </script>
+</body>
+
+</html>
