@@ -1,0 +1,25 @@
+.tabs_buttons_list_button_active {
+    background-color: purple;
+    padding: 7px 20px;
+    border: none;
+}
+
+.tabs_buttons_list_button{
+    cursor: pointer;
+}
+
+#tabs {
+    max-width: 200px;
+}
+
+.tabs_content_list_content {
+    display: none;
+}
+
+.tabs_content_list_content_active {
+    display: flex;
+    background-color: darkorchid;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
