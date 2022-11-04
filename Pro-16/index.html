@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./main.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <input class="inp" placeholder="Git username" type="text">
+        <button class="btn">Find</button>
+    </div>
+    <div id="container"></div>
+
+    <script id="template" type="text/template">
+        <img class="img" src="[src]" alt="">
+        <p class="rep">Repos: [rep]</p>
+        <p class="followers">Followers: [followers]</p>
+        <p class="following">Following: [following]</p>
+    </script>
+</body>
+
+</html>
