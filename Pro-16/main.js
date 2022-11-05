@@ -20,7 +20,7 @@ findUserNameBtnEl.addEventListener('click', onFindUserNameBtnElClick)
 
 function onFindUserNameBtnElClick() {
     fetch(`https://api.github.com/users/${getUserName()}`)
-        .then((res) => res.ok ? res.json() : Promise.reject('error: ' + res.status))
+        .then((res) => res.ok ? res.json() : Promise.reject('error: ' + res.status + ` Not Found Username: ${getUserName()}`))
         .then((res) => {
             if (res) {
                 clearOldTemplate()
@@ -68,8 +68,4 @@ function clearInp() {
 
 function getUserName() {
     return getUserNameInpEl.value
-}
-
-function showError() {
-    alert(`error 404 Not Found Username: ${getUserName()}`)
 }
