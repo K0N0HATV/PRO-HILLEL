@@ -37,18 +37,7 @@ function onFindUserNameBtnElClick() {
 }
 
 function clearOldTemplate() {
-    const imgActive = document.querySelector(`.${CLASS_IMG}`)
-    const repActive = document.querySelector(`.${CLASS_REPOSITORIES}`)
-    const followersActive = document.querySelector(`.${CLASS_FOLLOWERS}`)
-    const followingActive = document.querySelector(`.${CLASS_FOLLOWING}`)
-
-    const arrayTemplateActive = [imgActive, repActive, followersActive, followingActive]
-
-    arrayTemplateActive.forEach(el => {
-        if (el) {
-            el.remove()
-        }
-    })
+    containerEl.textContent = ''
 }
 
 function showTemplate(res) {
