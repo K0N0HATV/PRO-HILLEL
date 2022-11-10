@@ -36,18 +36,20 @@ function onformElClick(e) {
 }
 
 function onTableElClick(e) {
-    if (e.target.classList.contains(CLASS_BUTTON)) {
+    if (isClassListContains(e.target, CLASS_BUTTON)) {
         const deleteTrEl = findEl(e.target)
         const deleteTrId = getId(deleteTrEl)
 
         const contact = getFindId(contactList, deleteTrId)
 
         if (contact) {
-            if (e.target.classList.contains(CLASS_BUTTON_DELETE)) {
+            if (isClassListContains(e.target, CLASS_BUTTON_DELETE)) {
                 deleteTrEl.remove()
-                ContactApi.deleteContact(deleteTrId).catch(showError)
+                ContactApi.deleteContact(deleteTrId)
+                    .then(getContactList)
+                    .catch(showError)
             }
-            if (e.target.classList.contains(CLASS_BUTTON_EDIT)) {
+            if (isClassListContains(e.target, CLASS_BUTTON_EDIT)) {
                 fillForm(contact)
                 return
             }
@@ -66,7 +68,6 @@ function saveContactList(contact) {
     if (contact.id) {
         ContactApi.updateContact(contact.id, contact).catch(showError)
         const contactOld = getFindId(contactList, contact.id)
-        console.log(contactOld);
 
         contactOld.firstName = contact.firstName
         contactOld.lastName = contact.lastName
@@ -137,6 +138,10 @@ function getTemplate(contact) {
 
 function getFindId(el, equals) {
     return el.find(elItem => elItem.id === equals)
+}
+
+function isClassListContains(el, classEl) {
+    return el.classList.contains(classEl)
 }
 
 function getFindAttribute(el, attribute, equals) {
