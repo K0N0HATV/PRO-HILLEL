@@ -51,7 +51,6 @@ function onTableElClick(e) {
             }
             if (isClassListContains(e.target, CLASS_BUTTON_EDIT)) {
                 fillForm(contact)
-                return
             }
         }
     }
