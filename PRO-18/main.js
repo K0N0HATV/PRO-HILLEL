@@ -6,13 +6,16 @@ const CLASS_BUTTON = 'button'
 const CLASS_BUTTON_DELETE = 'deleteBtn'
 const CLASS_BUTTON_EDIT = 'editBtn'
 const ATTRIBUTE_INPUT = 'name'
-const KEY_OBJECT_FIRST_NAME = 'firstName'
-const KEY_OBJECT_LAST_NAME = 'lastName'
-const KEY_OBJECT_PHONE = 'phone'
+const ID_INPUT_FIRST_NAME = 'inpFirstName'
+const ID_INPUT_LAST_NAME = 'inpLastName'
+const ID_INPUT_PHONE = 'inpPhone'
 
 const tableEl = document.querySelector(`#${ID_TABLE}`)
 const formEl = document.querySelector(`#${ID_FORM}`)
 const inpId = document.querySelector(`#${ID_INPUT_ID}`)
+const inpFirstName = document.querySelector(`#${ID_INPUT_FIRST_NAME}`)
+const inpLastName = document.querySelector(`#${ID_INPUT_LAST_NAME}`)
+const inpPhone = document.querySelector(`#${ID_INPUT_PHONE}`)
 const inpEl = Array.from(document.querySelectorAll(`.${CLASS_INPUT}`))
 let contactList = []
 
@@ -37,15 +40,15 @@ function onformElClick(e) {
 
 function onTableElClick(e) {
     if (isClassListContains(e.target, CLASS_BUTTON)) {
-        const deleteTrEl = findEl(e.target)
-        const deleteTrId = getId(deleteTrEl)
+        const trEl = findEl(e.target)
+        const trId = getId(trEl)
 
-        const contact = getFindId(contactList, deleteTrId)
+        const contact = getFindId(contactList, trId)
 
         if (contact) {
             if (isClassListContains(e.target, CLASS_BUTTON_DELETE)) {
-                deleteTrEl.remove()
-                ContactApi.deleteContact(deleteTrId)
+                trEl.remove()
+                ContactApi.deleteContact(trId)
                     .then(getContactList)
                     .catch(showError)
             }
@@ -82,9 +85,9 @@ function saveContactList(contact) {
 }
 
 function fillForm(contact) {
-    getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_FIRST_NAME).value = contact.firstName
-    getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_LAST_NAME).value = contact.lastName
-    getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_PHONE).value = contact.phone
+    inpFirstName.value = contact.firstName
+    inpLastName.value = contact.lastName
+    inpPhone.value = contact.phone
     inpId.value = contact.id
 }
 
@@ -103,9 +106,9 @@ function getContact() {
 
     return {
         ...contact,
-        firstName: getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_FIRST_NAME).value,
-        lastName: getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_LAST_NAME).value,
-        phone: getFindAttribute(inpEl, ATTRIBUTE_INPUT, KEY_OBJECT_PHONE).value,
+        firstName:  inpFirstName.value,
+        lastName: inpLastName.value,
+        phone: inpPhone.value,
     }
 }
 
@@ -141,10 +144,6 @@ function getFindId(el, equals) {
 
 function isClassListContains(el, classEl) {
     return el.classList.contains(classEl)
-}
-
-function getFindAttribute(el, attribute, equals) {
-    return el.find(elItem => elItem.getAttribute(attribute) === equals)
 }
 
 function isInpValueValid(el) {
