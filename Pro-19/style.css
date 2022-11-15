@@ -1,0 +1,22 @@
+#albums_list_a {
+    display: flex;
+    flex-direction: column;
+}
+
+#albums_list_img {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(9, 150px);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+#flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linkItem{
+    display: block;
+    width: fit-content;
+}
