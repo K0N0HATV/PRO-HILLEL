@@ -8,10 +8,10 @@ const albumsListImgContainer = document.querySelector(SELECTOR_ID_CONTAINER_LIST
 
 albumsListLinksContainer.addEventListener('click', onalbumsListLinksContainerClick)
 
-getList()
+getListLinks()
 GalleryApi.getListImg()
     .then(imgList => {
-        getList(imgList[DEFAULT_ALBUMS_INDEX].id)
+        getListImg(imgList[DEFAULT_ALBUMS_INDEX].id)
     })
     .catch(showError)
 
@@ -22,21 +22,21 @@ function onalbumsListLinksContainerClick(e) {
         const idLink = getId(e.target)
 
         if (idLink) {
-            getList(idLink)
+            getListImg(idLink)
         }
     }
 }
 
-function getList(id) {
-    if (id) {
-        GalleryApi.getListImg(id)
-            .then(renderListImg)
-            .catch(showError)
-    } else {
-        GalleryApi.getListAlbums()
-            .then(renderListLinks)
-            .catch(showError)
-    }
+function getListImg(id) {
+    GalleryApi.getListImg(id)
+        .then(renderListImg)
+        .catch(showError)
+}
+
+function getListLinks() {
+    GalleryApi.getListAlbums()
+        .then(renderListLinks)
+        .catch(showError)
 }
 
 function renderListLinks(ListLinks) {
