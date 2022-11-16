@@ -1,10 +1,8 @@
 class GalleryApi {
     static URL = 'https://jsonplaceholder.typicode.com'
-    static URL_ALBUMS_IMG = '/photos?albumId='
-    static URL_ALBUMS_LINKS = '/albums'
 
-    static request(id, url = '', method = 'GET', body) {
-        return fetch(`${this.URL}${id ? `${this.URL_ALBUMS_IMG}${id}` : `${this.URL_ALBUMS_LINKS}`}`, {
+    static request(id = '', url = '', method = 'GET', body) {
+        return fetch(`${this.URL}${id ? `/photos?albumId=${id}` : "/albums"}`, {
             method,
             body: JSON.stringify(body),
             headers: {
@@ -20,14 +18,17 @@ class GalleryApi {
             })
     }
 
-    static getList(id) {
+    static getListAlbums() {
+        return this.request()
+            .catch(err => {
+                throw new Error('Can not get albums list from server')
+            })
+    }
+
+    static getListImg(id) {
         return this.request(id)
             .catch(err => {
-                if (id) {
-                    throw new Error('can not get img list from srever')
-                }
-
-                throw new Error('can not get albums list from srever')
+                throw new Error('Can not get img list from server')
             })
     }
 }
