@@ -3,10 +3,10 @@ const SELECTOR_ID_CONTAINER_LIST_LINKS = '#albums_list_a'
 const SELECTOR_ID_CONTAINER_LIST_IMG = '#albums_list_img'
 const DEFAULT_ALBUMS_INDEX = 0
 
-const albumsListLinks = document.querySelector(SELECTOR_ID_CONTAINER_LIST_LINKS)
-const albumsListImg = document.querySelector(SELECTOR_ID_CONTAINER_LIST_IMG)
+const albumsListLinksContainer = document.querySelector(SELECTOR_ID_CONTAINER_LIST_LINKS)
+const albumsListImgContainer = document.querySelector(SELECTOR_ID_CONTAINER_LIST_IMG)
 
-albumsListLinks.addEventListener('click', onAlbumsListLinksClick)
+albumsListLinksContainer.addEventListener('click', onalbumsListLinksContainerClick)
 
 getList()
 GalleryApi.getListImg()
@@ -15,7 +15,7 @@ GalleryApi.getListImg()
     })
     .catch(showError)
 
-function onAlbumsListLinksClick(e) {
+function onalbumsListLinksContainerClick(e) {
     e.preventDefault()
 
     if (isLink(e.target, CLASS_LINK_ITEM)) {
@@ -42,13 +42,13 @@ function getList(id) {
 function renderListLinks(ListLinks) {
     const html = ListLinks.map(getTemplateLinks).join('')
 
-    albumsListLinks.innerHTML = html
+    albumsListLinksContainer.innerHTML = html
 }
 
 function renderListImg(ListImg) {
     const html = ListImg.map(getTemplateImg).join('')
 
-    albumsListImg.innerHTML = html
+    albumsListImgContainer.innerHTML = html
 }
 
 function getTemplateImg(img) {
