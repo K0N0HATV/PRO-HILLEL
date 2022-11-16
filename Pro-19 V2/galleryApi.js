@@ -1,8 +1,10 @@
 class GalleryApi {
     static URL = 'https://jsonplaceholder.typicode.com'
+    static URL_ALBUMS_IMG = '/photos?albumId='
+    static URL_ALBUMS_LINKS = '/albums'
 
     static request(id = '', url = '', method = 'GET', body) {
-        return fetch(`${this.URL}${id ? `/photos?albumId=${id}` : "/albums"}`, {
+        return fetch(`${this.URL}${id ? `${this.URL_ALBUMS_IMG}${id}` : `${this.URL_ALBUMS_LINKS}`}`, {
             method,
             body: JSON.stringify(body),
             headers: {
