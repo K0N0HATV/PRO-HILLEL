@@ -1,5 +1,12 @@
-const $notesListContainer = $('#notesList')
-const $formEl = $('#form')
+const SELECTOR_ID_NOTES_LIST = '#notesList'
+const SELECTOR_ID_FORM = '#form'
+const CLASS_DELETE_ITEM = 'notesItemDelete'
+const SELECTOR_ID_NOTES_ITEM = '#notesItem'
+const ATTRIBUTE_DATA_ID = 'id'
+const CLASS_NOTES_ITEM_TEXT_AREA = 'notesItemText'
+
+const $notesListContainer = $(SELECTOR_ID_NOTES_LIST)
+const $formEl = $(SELECTOR_ID_FORM)
 let notesList = []
 
 $formEl.on('submit', onFormElSubmit)
@@ -14,23 +21,23 @@ function onFormElSubmit(e) {
 }
 
 function onNotesListContainerClick(e) {
-    if (hasClass($(e.target), 'notesItemDelete')) {
-        const $note = $(e.target).closest('#notesItem')
-        const $idNote = $note.data('id')
+    if (hasClass($(e.target), CLASS_DELETE_ITEM)) {
+        const $note = $(e.target).closest(SELECTOR_ID_NOTES_ITEM)
+        const $idNote = $note.data(ATTRIBUTE_DATA_ID)
 
         NotesApi.delete($idNote).catch(showError)
 
         $note.remove()
     }
-    if (hasClass($(e.target), 'notesItemText')) {
+    if (hasClass($(e.target), CLASS_NOTES_ITEM_TEXT_AREA)) {
         $(e.target).focusout(() => {
             const $note = getNote($(e.target))
-            const $noteId = $(e.target).closest('#notesItem').data('id')
+            const $noteId = $(e.target).closest(SELECTOR_ID_NOTES_ITEM).data(ATTRIBUTE_DATA_ID)
             const oldNote = notesList.find(el => +el.id === $noteId)
 
             if (textAreaValid($note)) {
                 showError({ message: 'поле не должно быть пустое' })
-                throw new Error('поле не должно быть пустое')
+                return
             }
 
             oldNote.description = $note.description
@@ -39,20 +46,6 @@ function onNotesListContainerClick(e) {
 
             renderNotesList(notesList)
         })
-    }
-}
-
-function hasClass(el, classItem) {
-    return el.hasClass(classItem)
-}
-
-function textAreaValid(el) {
-    return el.description === ''
-}
-
-function getNote(el) {
-    return {
-        description: el.val()
     }
 }
 
@@ -80,6 +73,20 @@ function getTempateNotes(note) {
         <textarea class="notesItemText" cols="20" rows="2">${note.description}</textarea>
     </div>
     `
+}
+
+function getNote(el) {
+    return {
+        description: el.val()
+    }
+}
+
+function hasClass(el, classItem) {
+    return el.hasClass(classItem)
+}
+
+function textAreaValid(el) {
+    return el.description.trim() === ''
 }
 
 function showError(err) {
