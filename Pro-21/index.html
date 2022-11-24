@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
+    <script src="./contactApi.js" defer></script>
+    <script src="./main.js" defer></script>
+</head>
+
+<body>
+    <button class="btn">Add contact</button>
+    <table class="table"></table>
+
+    <div id="dialog-form" title="Save Contact">
+        <p class="validateTips">All form fields are required.</p>
+        <form class="form">
+            <input type="hidden" id="id">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" class="input" id="firstName" placeholder="firstName">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" class="input" id="lastName" placeholder="lastName">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" class="input" id="phone" placeholder="phone">
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </form>
+    </div>
+</body>
+
+</html>
