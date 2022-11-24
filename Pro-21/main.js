@@ -5,7 +5,7 @@ const SELECTOR_CLASS_FORM = '.form'
 const SELECTOR_ID_FIRST_NAME = '#firstName'
 const SELECTOR_ID_LAST_NAME = '#lastName'
 const SELECTOR_ID_PHONE = '#phone'
-const SELECTOR_ID_INPUT_ID = '#inpId'
+const SELECTOR_ID_INPUT_ID = '#id'
 const SELECTOR_ID_DIALOG_FORM = "#dialog-form"
 const SELECTOR_CLASS_DELETE_BTN = '.delete'
 const SELECTOR_CLASS_EDIT_BTN = '.edit'
@@ -23,7 +23,7 @@ const $formEl = $(SELECTOR_CLASS_FORM)
 const $inpFirstName = $(SELECTOR_ID_FIRST_NAME)
 const $inpLastName = $(SELECTOR_ID_LAST_NAME)
 const $inpPhone = $(SELECTOR_ID_PHONE)
-const $inpId = $(SELECTOR_ID_INPUT_ID)
+const $id = $(SELECTOR_ID_INPUT_ID)
 let contactsList = []
 const dialog = $(SELECTOR_ID_DIALOG_FORM).dialog({
     autoOpen: false,
@@ -33,7 +33,7 @@ const dialog = $(SELECTOR_ID_DIALOG_FORM).dialog({
     buttons: {
         Save: () => {
             const contact = getContact()
-            const $contactId = $inpId.val()
+            const $contactId = $id.val()
 
             if (validateInp()) {
                 return
@@ -126,19 +126,18 @@ function fillForm(contact) {
     for (const input of $inputs) {
         input.value = contact[input.id]
     }
-    $inpId[FIRST_ELEMENT].value = contact.id
+    $id[FIRST_ELEMENT].value = contact.id
 }
 
 function getContact() {
-    const $id = $inpId.val()
-    const contact = contactsList.find(el => el.id === $id) || {}
+    const $idContact = $id.val()
+    let contact = contactsList.find(el => el.id === $idContact) || {}
 
-    return {
-        ...contact,
-        firstName: $inpFirstName.val(),
-        lastName: $inpLastName.val(),
-        phone: $inpPhone.val(),
+    for (const input of $inputs) {
+        contact = { ...contact, [input.getAttribute(ATTRIBUTE_NAME)]: input.value }
     }
+
+    return contact
 }
 
 function getContactList() {
@@ -176,6 +175,5 @@ function showError({ message }) {
 
 function clear() {
     $formEl[FIRST_ELEMENT].reset()
-    $inpId[FIRST_ELEMENT].value = ''
     dialog.dialog(CLOSE_DIALOG);
 }
