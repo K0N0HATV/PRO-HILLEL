@@ -116,7 +116,7 @@ function updateContact(contactId, contact) {
 function validateInp() {
     return $inputs.find(el => {
         if (el.value.trim() === '') {
-            alert(`Заполните поле с названием: ${el.getAttribute(ATTRIBUTE_NAME)}`)
+            showError({message: `Заполните поле с названием: ${el.getAttribute(ATTRIBUTE_NAME)}`})
             return true
         }
     })
