@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
+    <script src="./notesApi.js" defer></script>
+    <script src="./FormModal.js" defer></script>
+    <script src="./main.js" defer></script>
+</head>
+
+<body>
+    <form id="form">
+        <button class="btn">Add Note</button>
+    </form>
+    <div id="notesList"></div>
+
+    <div id="dialog-form" title="Save Sticker">
+        <p class="validateTips">All form fields are required.</p>
+
+        <form>
+            <fieldset>
+                <input type="hidden" class="inp" id="id">
+                <label for="description">Description</label>
+                <input id="description" class="inp" name="description">
+
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>
