@@ -18,16 +18,24 @@ function onFormElSubmit(e) {
 
     const message = getMessage()
 
-    WebSocet.sendMessage(message)
+    if (message) {
+        WebSocet.sendMessage(message)
 
-    clearForm()
+        clearForm()
+    }
 }
 
 function getMessage() {
     let message = {}
 
     for (const input of inputs) {
-        message[input.getAttribute(ATTRIBUTE_NAME)] = input.value
+        if (input.value.trim()) {
+            message[input.getAttribute(ATTRIBUTE_NAME)] = input.value
+        }
+        else {
+            showError(`поле ${input.getAttribute(ATTRIBUTE_NAME)} должно быть заполненым `)
+            return
+        }
     }
 
     return message
@@ -46,4 +54,8 @@ function getTemplate({ message, name }) {
 
 function clearForm() {
     formEl.reset()
+}
+
+function showError(err) {
+    alert(err)
 }
