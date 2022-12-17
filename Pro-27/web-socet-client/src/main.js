@@ -8,7 +8,7 @@ const ATTRIBUTE_NAME = 'name'
 const formEl = document.querySelector(CLASS_SELECTOR_FORM_EL)
 const inputs = document.querySelectorAll(CLASS_SELECTOR_INPUT_EL)
 const ulEl = document.querySelector(CLASS_SELECTOR_CONTAINER)
-const WebSocet = new Server()
+const WebSocet = new Server({ onMessage: renderMessage })
 
 
 formEl.addEventListener('submit', onFormElSubmit)
@@ -25,6 +25,12 @@ function onFormElSubmit(e) {
     }
 }
 
+function renderMessage(message) {
+    const liEl = getTemplate(message)
+
+    ulEl.insertAdjacentHTML('beforeend', liEl)
+}
+
 function getMessage() {
     let message = {}
 
@@ -39,13 +45,6 @@ function getMessage() {
     }
 
     return message
-}
-
-WebSocet.ws.onmessage = (e) => {
-    const data = JSON.parse(e.data)
-    const liEl = getTemplate(data)
-
-    ulEl.insertAdjacentHTML('beforeend', liEl)
 }
 
 function getTemplate({ message, name }) {
