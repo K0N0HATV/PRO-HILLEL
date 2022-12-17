@@ -4,10 +4,18 @@ export default class WebSocet {
     constructor(option) {
         this.option = option
         this.ws = new WebSocket(WebSocet.URL)
-        this.ws.onopen = this.onopen.bind(this)
-        this.ws.onmessage = this.onmessage.bind(this)
-        this.ws.onclose = this.onclose.bind(this)
-        this.ws.onerror = this.onerror
+        this.ws.onopen = () => {
+            this.onopen()
+        }
+        this.ws.onmessage = (e) => {
+            this.onmessage(e)
+        }
+        this.ws.onclose = () => {
+            this.onclose()
+        }
+        this.ws.onerror = (err) => {
+            this.onerror(err)
+        }
     }
 
     sendMessage(message) {

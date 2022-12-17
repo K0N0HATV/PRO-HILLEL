@@ -1,4 +1,4 @@
-import Server from "./Server.js"
+import Server from "./WebSocet.js"
 
 const CLASS_SELECTOR_FORM_EL = '.form'
 const CLASS_SELECTOR_INPUT_EL = '.inp'
@@ -8,8 +8,9 @@ const ATTRIBUTE_NAME = 'name'
 const formEl = document.querySelector(CLASS_SELECTOR_FORM_EL)
 const inputs = document.querySelectorAll(CLASS_SELECTOR_INPUT_EL)
 const ulEl = document.querySelector(CLASS_SELECTOR_CONTAINER)
-const WebSocet = new Server({ onMessage: renderMessage })
-
+const WebSocet = new Server({
+    onMessage: renderMessage
+})
 
 formEl.addEventListener('submit', onFormElSubmit)
 
