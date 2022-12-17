@@ -1,8 +1,13 @@
 import Server from "./Server.js"
 
-const formEl = document.querySelector('.form')
-const inputs = document.querySelectorAll('.inp')
-const ulEl = document.querySelector('.ulContainer')
+const CLASS_SELECTOR_FORM_EL = '.form'
+const CLASS_SELECTOR_INPUT_EL = '.inp'
+const CLASS_SELECTOR_CONTAINER = '.ulContainer'
+const ATTRIBUTE_NAME = 'name'
+
+const formEl = document.querySelector(CLASS_SELECTOR_FORM_EL)
+const inputs = document.querySelectorAll(CLASS_SELECTOR_INPUT_EL)
+const ulEl = document.querySelector(CLASS_SELECTOR_CONTAINER)
 const WebSocet = new Server()
 
 
@@ -11,15 +16,21 @@ formEl.addEventListener('submit', onFormElSubmit)
 function onFormElSubmit(e) {
     e.preventDefault()
 
-    let message = {}
-
-    for (const input of inputs) {
-        message[input.getAttribute('name')] = input.value
-    }
+    const message = getMessage()
 
     WebSocet.sendMessage(message)
 
     clearForm()
+}
+
+function getMessage() {
+    let message = {}
+
+    for (const input of inputs) {
+        message[input.getAttribute(ATTRIBUTE_NAME)] = input.value
+    }
+
+    return message
 }
 
 WebSocet.ws.onmessage = (e) => {
