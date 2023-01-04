@@ -30,6 +30,7 @@ export default function useTodo() {
                     const newList = todoList.map(todoItem => todoItem.id === updateTodo.id ? updateTodo : todoItem)
 
                     setTodoList(newList);
+                    setError('')
                 })
                 .catch(err => setError(err.message))
                 .finally(() => setLoading(false))
@@ -38,12 +39,11 @@ export default function useTodo() {
                 .create(todo)
                 .then(newTodo => {
                     setTodoList([...todoList, newTodo])
-                    setLoading(false)
+                    setError('')
                 })
                 .catch(err => setError(err.message))
+                .finally(() => setLoading(false))
         }
-
-        setError('')
     }
 
     function onEdit(todo, e) {
