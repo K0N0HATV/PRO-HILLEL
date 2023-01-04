@@ -27,16 +27,12 @@ export default function useTodo() {
             TodoApi
                 .update(todo.id, todo)
                 .then(updateTodo => {
-                    const oldTodo = todoList.find(todos => todos.id === todo.id)
+                    const newList = todoList.map(todoItem => todoItem.id === updateTodo.id ? updateTodo : todoItem)
 
-                    for (const key in oldTodo) {
-                        oldTodo[key] = updateTodo[key]
-                    }
-
-                    setTodoList([...todoList])
-                    setLoading(false)
+                    setTodoList(newList);
                 })
                 .catch(err => setError(err.message))
+                .finally(() => setLoading(false))
         } else {
             TodoApi
                 .create(todo)
@@ -66,9 +62,9 @@ export default function useTodo() {
                 const list = todoList.filter(todo => todo.id !== id)
                 setTodoList(list)
                 setError('')
-                setLoading(false)
             })
             .catch(err => setError(err.message))
+            .finally(() => setLoading(false))
     }
 
     function changeDone(todo) {
